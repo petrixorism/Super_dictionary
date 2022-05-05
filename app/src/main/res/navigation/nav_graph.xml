@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/addWordFragment"
+        tools:layout="@layout/fragment_add_word"
+        android:name="uz.gita.superdictionary.ui.screen.AddWordFragment"
+        android:label="AddWordFragment" />
+    <fragment
+        android:id="@+id/addedWordsFragment"
+        tools:layout="@layout/fragment_added_words"
+        android:name="uz.gita.superdictionary.ui.screen.AddedWordsFragment"
+        android:label="AddedWordsFragment" />
+    <fragment
+        android:id="@+id/favouritesFragment"
+        tools:layout="@layout/fragment_favourites"
+        android:name="uz.gita.superdictionary.ui.screen.FavouritesFragment"
+        android:label="FavouritesFragment" />
+    <fragment
+        android:id="@+id/historyFragment"
+        tools:layout="@layout/fragment_history"
+        android:name="uz.gita.superdictionary.ui.screen.HistoryFragment"
+        android:label="HistoryFragment" />
+    <fragment
+        android:id="@+id/homeFragment"
+        tools:layout="@layout/fragment_home"
+        android:name="uz.gita.superdictionary.ui.screen.HomeFragment"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_wordFragment"
+            app:destination="@id/wordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/shareFragment"
+        tools:layout="@layout/fragment_share"
+        android:name="uz.gita.superdictionary.ui.screen.ShareFragment"
+        android:label="ShareFragment" />
+    <fragment
+        android:id="@+id/splashFragment"
+        tools:layout="@layout/fragment_splash"
+        android:name="uz.gita.superdictionary.ui.screen.SplashFragment"
+        android:label="SplashFragment" >
+        <action
+            android:id="@+id/action_splashFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateAddedWordFragment"
+        tools:layout="@layout/fragment_update_added_words"
+        android:name="uz.gita.superdictionary.ui.screen.UpdateAddedWordFragment"
+        android:label="UpdateAddedWordFragment" />
+    <fragment
+        android:id="@+id/wordFragment"
+        tools:layout="@layout/fragment_word"
+        android:name="uz.gita.superdictionary.ui.screen.WordFragment"
+        android:label="WordFragment" />
+</navigation>
