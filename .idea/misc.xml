@@ -12,15 +12,22 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/SuperDictionary2/app/src/main/res/layout/fragment_splash.xml" value="0.11574074074074074" />
         <entry key="..\:/Users/User/AndroidStudioProjects/SuperDictionary2/app/src/main/res/layout/fragment_update_added_words.xml" value="0.11574074074074074" />
         <entry key="..\:/Users/User/AndroidStudioProjects/SuperDictionary2/app/src/main/res/layout/fragment_word.xml" value="0.11574074074074074" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Super_dictionary/app/src/main/res/drawable/bookmark_background.xml" value="0.3405" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Super_dictionary/app/src/main/res/drawable/check_box_background.xml" value="0.2925" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Super_dictionary/app/src/main/res/drawable/home_icon.xml" value="0.3115" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Super_dictionary/app/src/main/res/drawable/ic_back.xml" value="0.3115" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Super_dictionary/app/src/main/res/drawable/ic_copy.xml" value="0.3405" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Super_dictionary/app/src/main/res/drawable/ic_grid.xml" value="0.2925" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Super_dictionary/app/src/main/res/drawable/ic_logo.xml" value="0.1" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Super_dictionary/app/src/main/res/drawable/ic_search.xml" value="0.2925" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Super_dictionary/app/src/main/res/drawable/ic_share.xml" value="0.3405" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Super_dictionary/app/src/main/res/drawable/ic_sun.xml" value="0.3405" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Super_dictionary/app/src/main/res/drawable/ic_text.xml" value="0.1" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Super_dictionary/app/src/main/res/drawable/ic_volume.xml" value="0.3405" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Super_dictionary/app/src/main/res/drawable/white_backgound.xml" value="0.1" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Super_dictionary/app/src/main/res/drawable/white_background.xml" value="0.2925" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Super_dictionary/app/src/main/res/drawable/white_bookmark.xml" value="0.3405" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Super_dictionary/app/src/main/res/drawable/white_bookmark_fill.xml" value="0.3405" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Super_dictionary/app/src/main/res/layout/activity_main.xml" value="0.18143459915611815" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Super_dictionary/app/src/main/res/layout/fragment_add_word.xml" value="0.3265625" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Super_dictionary/app/src/main/res/layout/fragment_favourites.xml" value="0.3671875" />
@@ -30,7 +37,7 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/Super_dictionary/app/src/main/res/layout/fragment_settings.xml" value="0.1" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Super_dictionary/app/src/main/res/layout/fragment_share.xml" value="0.3671875" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Super_dictionary/app/src/main/res/layout/fragment_splash.xml" value="0.5" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/Super_dictionary/app/src/main/res/layout/fragment_word.xml" value="0.3265625" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Super_dictionary/app/src/main/res/layout/fragment_word.xml" value="0.33" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Super_dictionary/app/src/main/res/layout/item_word.xml" value="0.5" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Super_dictionary/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
       </map>
