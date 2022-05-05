@@ -58,4 +58,8 @@
         tools:layout="@layout/fragment_word"
         android:name="uz.gita.superdictionary.ui.screen.WordFragment"
         android:label="WordFragment" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="uz.gita.superdictionary.ui.screen.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>
