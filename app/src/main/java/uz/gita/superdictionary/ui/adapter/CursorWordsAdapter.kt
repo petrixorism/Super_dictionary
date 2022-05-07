@@ -57,7 +57,7 @@ class CursorWordsAdapter : RecyclerView.Adapter<CursorWordsAdapter.Holder>() {
                     if (data.isSaved == 1) {
                         data.isSaved = 0
                     } else data.isSaved = 1
-                    itemClick!!.invoke(data)
+                    toggleClick!!.invoke(data)
                 }
             }
         }

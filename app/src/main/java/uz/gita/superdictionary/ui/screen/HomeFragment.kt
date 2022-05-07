@@ -3,9 +3,11 @@ package uz.gita.superdictionary.ui.screen
 import android.database.Cursor
 import android.os.Bundle
 import android.view.View
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,6 +38,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         }
 
+
+        binding.wordEt.setOnQueryTextListener(listener)
+
         viewModel.cursorWordsLiveData.observe(viewLifecycleOwner, cursorWordsObserver)
         viewModel.failLiveData.observe(viewLifecycleOwner, failObserver)
         viewModel.updateWordLiveData.observe(viewLifecycleOwner, updateWordObserver)
@@ -47,20 +52,40 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
 
         wordsAdapter.setItemClick {
-            showSnackBar(it.definition)
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToWordFragment(
+                    it.id.toLong(),
+                    it.word,
+                    it.definition,
+                    it.example,
+                    it.synonym,
+                    it.antonym,
+                    it.isSaved.toString()
+                )
+            )
         }
 
     }
 
+    private val listener = object : SearchView.OnQueryTextListener {
+        override fun onQueryTextSubmit(p0: String?): Boolean {
+            viewModel.searchWord(p0.toString())
+            return true
+        }
 
-    private val cursorWordsObserver = Observer<Cursor>{
+        override fun onQueryTextChange(p0: String?): Boolean {
+            return false
+        }
+    }
+
+    private val cursorWordsObserver = Observer<Cursor> {
         wordsAdapter.submitCursor(it)
     }
 
-    private val failObserver = Observer<String>{
+    private val failObserver = Observer<String> {
         showToast(it)
     }
-    private val updateWordObserver = Observer<Unit>{
+    private val updateWordObserver = Observer<Unit> {
         viewModel.getAllWords()
     }
 

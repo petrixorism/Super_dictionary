@@ -11,6 +11,8 @@ class WordsRepositoryImpl @Inject constructor(private val dao: WordDao) : WordsR
 
     override fun getWordsCursor(): Cursor = dao.getAllWordsCursor()
 
+    override fun getSavedWordsList(): Cursor = dao.getSavedWords()
+
     override fun updateWord(wordEntity: WordEntity) = dao.updateWord(wordEntity)
 
     override fun deleteWords(wordEntity: WordEntity) = dao.deleteWord(wordEntity)

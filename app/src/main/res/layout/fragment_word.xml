@@ -31,6 +31,7 @@
 
 
         <ImageButton
+            android:id="@+id/back_btn"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="18dp"
@@ -41,8 +42,9 @@
             app:layout_constraintTop_toTopOf="@+id/textView2" />
 
         <ImageButton
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:id="@+id/grid_btn"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginEnd="18dp"
             android:background="@drawable/ic_grid"
             android:foreground="?android:selectableItemBackgroundBorderless"
@@ -80,16 +82,17 @@
             app:layout_constraintTop_toBottomOf="@+id/word_tv" />
 
 
-        <ImageButton
+        <ToggleButton
             android:id="@+id/word_save"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="16dp"
-
             android:alpha=".8"
             android:background="@drawable/word_bookmark"
             android:foreground="?android:selectableItemBackgroundBorderless"
+            android:textOff=""
+            android:textOn=""
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/word_voice"
             app:layout_constraintStart_toEndOf="@id/word_share"
@@ -198,6 +201,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:background="@drawable/white_background"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@id/meaning_container">
 
                 <TextView
@@ -237,7 +241,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="12dp"
                     android:layout_marginVertical="16dp"
-
                     android:justificationMode="inter_word"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/view2"
@@ -246,11 +249,12 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
                 android:id="@+id/synonym_container"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:background="@drawable/white_background"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@id/example_container">
 
                 <TextView
@@ -288,6 +292,7 @@
                     style="@style/MyTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+
                     android:layout_marginHorizontal="12dp"
                     android:layout_marginVertical="16dp"
                     android:justificationMode="inter_word"
@@ -298,10 +303,12 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/antonym_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:background="@drawable/white_background"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@id/synonym_container">
 
                 <TextView

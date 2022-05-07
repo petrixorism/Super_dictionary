@@ -14,9 +14,8 @@ interface WordDao {
     @Delete
     fun deleteWord(word: WordEntity)
 
-    @Query("SELECT * FROM words")
-    fun getAllWords(): LiveData<List<WordEntity>>
-
+    @Query("SELECT * FROM words WHERE isSaved=1 ORDER BY en_word")
+    fun getSavedWords(): Cursor
 
     @Query("SELECT * FROM words ORDER BY en_word")
     fun getAllWordsCursor(): Cursor
