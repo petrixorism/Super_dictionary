@@ -27,20 +27,26 @@ class FavouritesFragment : Fragment(R.layout.fragment_favourites) {
     private val viewModel: FavouritesViewModel by viewModels<FavouritesViewModelImpl>()
     private val adapter by lazy { CursorWordsAdapter() }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        viewModel.getSavedWords()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-        viewModel.cursorWordsLiveData.observe(viewLifecycleOwner) {
-            showToast(it.count.toString())
+        viewModel.cursorWordsLiveData.observe(this) {
             adapter.submitCursor(it)
         }
 
-        viewModel.failLiveData.observe(viewLifecycleOwner) {
+        viewModel.failLiveData.observe(this) {
             showToast(it)
         }
 
-        viewModel.updateWordLiveData.observe(viewLifecycleOwner, updateObserver)
+        viewModel.updateWordLiveData.observe(this, updateObserver)
+
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        viewModel.getSavedWords()
         binding.backBtn.setOnClickListener {
             requireActivity().onBackPressed()
         }

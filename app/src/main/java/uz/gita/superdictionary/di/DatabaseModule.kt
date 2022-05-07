@@ -15,13 +15,17 @@ import javax.inject.Singleton
 object DatabaseModule {
 
     @[Singleton Provides]
-    fun provideRunningDatabase(@ApplicationContext context: Context) =
+    fun provideDictionaryDatabase(@ApplicationContext context: Context) =
         Room.databaseBuilder(context, DictionaryDatabase::class.java, "eng_dictionary.db")
             .createFromAsset("eng_dictionary.db")
             .allowMainThreadQueries()
             .build()
 
     @[Singleton Provides]
-    fun provideRunDao(db: DictionaryDatabase) = db.getWordDao()
+    fun provideWordDao(db: DictionaryDatabase) = db.getWordDao()
+
+
+    @[Singleton Provides]
+    fun provideHistoryDao(db: DictionaryDatabase) = db.getHistoryDao()
 
 }

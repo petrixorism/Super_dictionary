@@ -13,6 +13,8 @@ interface HomeViewModel {
     val updateWordLiveData: LiveData<Unit>
 
 
+    fun addToHistory(wordEntity: WordEntity)
+
     fun getAllWords()
 
     fun searchWord(query: String)

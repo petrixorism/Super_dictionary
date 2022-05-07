@@ -28,30 +28,29 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val viewModel: HomeViewModel by viewModels<HomeViewModelImpl>()
     private val wordsAdapter by lazy { CursorWordsAdapter() }
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.cursorWordsLiveData.observe(this, cursorWordsObserver)
+        viewModel.failLiveData.observe(this, failObserver)
+        viewModel.updateWordLiveData.observe(this, updateWordObserver)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         binding.wordsRv.apply {
-
-            layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             adapter = wordsAdapter
-
         }
 
 
         binding.wordEt.setOnQueryTextListener(listener)
-
-        viewModel.cursorWordsLiveData.observe(viewLifecycleOwner, cursorWordsObserver)
-        viewModel.failLiveData.observe(viewLifecycleOwner, failObserver)
-        viewModel.updateWordLiveData.observe(viewLifecycleOwner, updateWordObserver)
-
         viewModel.getAllWords()
-
         wordsAdapter.setToggleClick {
             viewModel.updateWord(it)
         }
-
         wordsAdapter.setItemClick {
+            viewModel.addToHistory(it)
             findNavController().navigate(
                 HomeFragmentDirections.actionHomeFragmentToWordFragment(
                     it.id.toLong(),

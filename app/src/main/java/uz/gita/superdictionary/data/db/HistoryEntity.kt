@@ -9,6 +9,10 @@ data class HistoryEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
 
-    @ColumnInfo(name = "en_word")
+    @ColumnInfo(name = "word")
     val word: String,
+
+    @ColumnInfo(name = "time")
+    val time: String = System.currentTimeMillis().toString()
+
 )
