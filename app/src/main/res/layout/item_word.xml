@@ -17,15 +17,16 @@
         android:layout_marginEnd="16dp"
         android:gravity="start"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/checkBox"
+        app:layout_constraintEnd_toStartOf="@+id/is_saved_tgbtn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Abacktus" />
 
     <ToggleButton
-        android:id="@+id/checkBox"
+        android:id="@+id/is_saved_tgbtn"
         android:layout_width="30dp"
         android:textOn=""
+        android:checked="false"
         android:foreground="?android:selectableItemBackgroundBorderless"
         android:textOff=""
         android:layout_height="30dp"
