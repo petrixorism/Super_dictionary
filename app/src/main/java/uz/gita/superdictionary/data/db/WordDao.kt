@@ -26,4 +26,6 @@ interface WordDao {
     @Update
     fun updateWord(word: WordEntity)
 
+    @Query("SELECT * FROM words WHERE en_word LIKE :word")
+    fun getOneWord(word: String): WordEntity?
 }

@@ -13,7 +13,7 @@ class SplashViewModelImpl : ViewModel(), SplashViewModel {
 
     init {
         viewModelScope.launch {
-            delay(2000L)
+            delay(1500L)
             splashLiveData.value = Unit
         }
 

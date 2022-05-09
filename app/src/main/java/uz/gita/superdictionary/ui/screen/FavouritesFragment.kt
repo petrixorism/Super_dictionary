@@ -60,7 +60,7 @@ class FavouritesFragment : Fragment(R.layout.fragment_favourites) {
         adapter.setItemClick {
             findNavController().navigate(
                 FavouritesFragmentDirections.actionFavouritesFragmentToWordFragment(
-                    it.id.toLong(),
+                    it.id,
                     it.word,
                     it.definition,
                     it.example,

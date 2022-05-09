@@ -21,4 +21,7 @@ class WordsRepositoryImpl @Inject constructor(private val dao: WordDao) : WordsR
 
     override fun getCursorBySearch(query: String): Cursor = dao.getWordCursorByQuery(query)
 
+    override fun addWord(wordEntity: WordEntity) = dao.insertWord(wordEntity)
+
+
 }

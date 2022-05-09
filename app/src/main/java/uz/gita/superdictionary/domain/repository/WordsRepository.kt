@@ -17,4 +17,6 @@ interface WordsRepository {
 
     fun getCursorBySearch(query: String): Cursor
 
+    fun addWord(wordEntity: WordEntity)
+
 }

@@ -28,4 +28,7 @@ object DatabaseModule {
     @[Singleton Provides]
     fun provideHistoryDao(db: DictionaryDatabase) = db.getHistoryDao()
 
+    @[Singleton Provides]
+    fun provideAddedWordsDao(db: DictionaryDatabase) = db.getAddedWordDao()
+
 }

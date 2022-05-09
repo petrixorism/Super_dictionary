@@ -1,6 +1,5 @@
 package uz.gita.superdictionary.ui.viewmodel.impl
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

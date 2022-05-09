@@ -86,4 +86,7 @@ dependencies {
 
     // Corbind
     implementation 'ru.ldralighieri.corbind:corbind:1.5.3'
+
+    //Fast scrolling
+    implementation 'me.zhanghai.android.fastscroll:library:1.1.8'
 }

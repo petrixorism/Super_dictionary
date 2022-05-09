@@ -5,11 +5,13 @@ import android.database.Cursor
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import me.zhanghai.android.fastscroll.PopupTextProvider
 import uz.gita.superdictionary.data.db.WordEntity
 import uz.gita.superdictionary.databinding.ItemWordBinding
 
 
-class CursorWordsAdapter : RecyclerView.Adapter<CursorWordsAdapter.Holder>() {
+class CursorWordsAdapter : RecyclerView.Adapter<CursorWordsAdapter.Holder>(), PopupTextProvider {
+
     private var itemClick: ((WordEntity) -> Unit)? = null
     private var toggleClick: ((WordEntity) -> Unit)? = null
 
@@ -45,14 +47,13 @@ class CursorWordsAdapter : RecyclerView.Adapter<CursorWordsAdapter.Holder>() {
 
                 itemWordBinding.apply {
                     this.textView.text = word
-
                     this.isSavedTgbtn.isChecked = data.isSaved == 1
-
-
                 }
+
                 itemWordBinding.root.setOnClickListener {
                     itemClick!!.invoke(data)
                 }
+
                 itemWordBinding.isSavedTgbtn.setOnClickListener {
                     if (data.isSaved == 1) {
                         data.isSaved = 0
@@ -85,6 +86,10 @@ class CursorWordsAdapter : RecyclerView.Adapter<CursorWordsAdapter.Holder>() {
 
     fun setToggleClick(block: (WordEntity) -> Unit) {
         toggleClick = block
+    }
+
+    override fun getPopupText(position: Int): String {
+        return cursor!!.getString(cursor!!.getColumnIndexOrThrow("en_word")).substring(0, 1).uppercase()
     }
 
 }

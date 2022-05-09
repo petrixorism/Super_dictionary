@@ -1,7 +1,11 @@
 package uz.gita.superdictionary.ui.screen
 
+import android.app.Activity
+import android.content.Intent
 import android.database.Cursor
 import android.os.Bundle
+import android.speech.RecognizerIntent
+import android.speech.tts.TextToSpeech
 import android.view.View
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -11,15 +15,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import me.zhanghai.android.fastscroll.FastScrollerBuilder
 import uz.gita.superdictionary.R
 import uz.gita.superdictionary.databinding.FragmentHomeBinding
 import uz.gita.superdictionary.ui.adapter.CursorWordsAdapter
 import uz.gita.superdictionary.ui.viewmodel.HomeViewModel
-import uz.gita.superdictionary.ui.viewmodel.SplashViewModel
 import uz.gita.superdictionary.ui.viewmodel.impl.HomeViewModelImpl
-import uz.gita.superdictionary.ui.viewmodel.impl.SplashViewModelImpl
-import uz.gita.superdictionary.util.showSnackBar
 import uz.gita.superdictionary.util.showToast
+import java.util.*
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -27,6 +30,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val binding by viewBinding(FragmentHomeBinding::bind)
     private val viewModel: HomeViewModel by viewModels<HomeViewModelImpl>()
     private val wordsAdapter by lazy { CursorWordsAdapter() }
+    private val REQUEST_CODE = 100
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,8 +42,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        FastScrollerBuilder(binding.wordsRv)
+            .build()
+
         binding.wordsRv.apply {
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             adapter = wordsAdapter
         }
 
@@ -53,7 +61,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             viewModel.addToHistory(it)
             findNavController().navigate(
                 HomeFragmentDirections.actionHomeFragmentToWordFragment(
-                    it.id.toLong(),
+                    it.id,
                     it.word,
                     it.definition,
                     it.example,
@@ -62,6 +70,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     it.isSaved.toString()
                 )
             )
+        }
+        binding.voiceToTextBtn.setOnClickListener {
+            speechToText()
         }
 
     }
@@ -88,4 +99,37 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         viewModel.getAllWords()
     }
 
+    private fun speechToText() {
+
+        val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+        intent.putExtra(
+            RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+            RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+        )
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en-UK");
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Say something")
+
+        try {
+            startActivityForResult(intent, REQUEST_CODE);
+        } catch (e: Throwable) {
+            showToast("Sorry! your device does not support speech input")
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        when (requestCode) {
+            REQUEST_CODE -> {
+                if (resultCode == Activity.RESULT_OK && data != null) {
+                    val result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+                    binding.wordEt.setQuery(result!![0], true)
+                    viewModel.searchWord(result!![0])
+
+                }
+            }
+
+        }
+
+    }
 }

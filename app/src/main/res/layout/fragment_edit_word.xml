@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Add words"
+            android:text="Edit words"
             android:textColor="@color/white"
             android:textSize="22sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -140,7 +140,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/synonym_et" />
 
             <Button
-                android:id="@+id/add_word_btn"
+                android:id="@+id/edit_word_btn"
                 style="@style/MyTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -149,7 +149,7 @@
                 android:background="@drawable/blue_background"
                 android:foreground="?android:selectableItemBackground"
                 android:paddingHorizontal="16dp"
-                android:text="Add"
+                android:text="Edit"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"

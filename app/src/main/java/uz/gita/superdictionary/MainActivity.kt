@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         navHostFragment.navController.addOnDestinationChangedListener { _, destination, _ ->
             // invisible some fragments later
             when (destination.id) {
-                R.id.wordFragment, R.id.updateAddedWordFragment, R.id.addedWordsFragment, R.id.splashFragment-> makeVisibleOrGone(
+                R.id.wordFragment, R.id.editWordFragment, R.id.addWordFragment, R.id.splashFragment -> makeVisibleOrGone(
                     binding.bottomNav,
                     false
                 )

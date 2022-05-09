@@ -35,7 +35,6 @@ class HomeViewModelImpl @Inject constructor(
     override fun getAllWords() {
 
         cursorWordsLiveData.value = repository.getWordsCursor()
-
     }
 
     override fun searchWord(query: String) {

@@ -1,6 +1,10 @@
 package uz.gita.superdictionary.ui.screen
 
+import android.app.Activity.RESULT_OK
+import android.content.Intent
 import android.os.Bundle
+import android.speech.RecognizerIntent
+import android.speech.tts.TextToSpeech
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,6 +19,8 @@ import uz.gita.superdictionary.ui.viewmodel.WordViewModel
 import uz.gita.superdictionary.ui.viewmodel.impl.WordViewModelImpl
 import uz.gita.superdictionary.util.makeVisibleOrGone
 import uz.gita.superdictionary.util.showSnackBar
+import uz.gita.superdictionary.util.showToast
+import java.util.*
 
 @AndroidEntryPoint
 class WordFragment : Fragment(R.layout.fragment_word) {
@@ -22,26 +28,29 @@ class WordFragment : Fragment(R.layout.fragment_word) {
     private val binding by viewBinding(FragmentWordBinding::bind)
     private val args by navArgs<WordFragmentArgs>()
     private val viewModel: WordViewModel by viewModels<WordViewModelImpl>()
+    private val REQUEST_CODE = 100
+    private var textToSpeech: TextToSpeech? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
 
         viewModel.updateLiveData.observe(viewLifecycleOwner, updateObserver)
 
+
         binding.apply {
 
             wordTv.text = args.word
             wordMeaning.text = args.meaning
 
-            if (args.example != "NA") {
+            if (args.example != "NA" && args.example.isNotEmpty()) {
                 makeVisibleOrGone(this.exampleContainer, true)
                 this.wordExamples.text = args.example
             }
-            if (args.synonym != "NA") {
+            if (args.synonym != "NA" && args.synonym.isNotEmpty()) {
                 makeVisibleOrGone(this.synonymContainer, true)
                 this.wordSynonym.text = args.synonym
             }
-            if (!args.antonym.contains("NA")) {
+            if (!args.antonym.contains("NA") && args.antonym.isNotEmpty()) {
                 makeVisibleOrGone(this.antonymContainer, true)
                 this.wordAntonym.text = args.antonym
             }
@@ -53,7 +62,7 @@ class WordFragment : Fragment(R.layout.fragment_word) {
             wordSave.setOnClickListener {
                 viewModel.updateWord(
                     WordEntity(
-                        args.id.toInt(),
+                        args.id,
                         args.word,
                         args.meaning,
                         args.example,
@@ -64,7 +73,22 @@ class WordFragment : Fragment(R.layout.fragment_word) {
                 )
             }
         }
+        textToSpeech = TextToSpeech(requireContext()) { status ->
+            if (status == TextToSpeech.SUCCESS) {
+                textToSpeech!!.language = Locale.UK
 
+            }
+        }
+        textToSpeech!!.language = Locale.UK
+        binding.wordVoice.setOnClickListener {
+            val word = args.word
+            textToSpeech!!.speak(
+                word[0] + word.substring(1, word.length),
+                TextToSpeech.QUEUE_FLUSH,
+                null,
+                ""
+            )
+        }
     }
 
     private val updateObserver = Observer<Boolean> {
@@ -75,4 +99,15 @@ class WordFragment : Fragment(R.layout.fragment_word) {
         }
     }
 
+
+
+    override fun onDestroy() {
+        if (textToSpeech != null) {
+            textToSpeech!!.stop()
+            textToSpeech!!.shutdown()
+        }
+        super.onDestroy()
+
+
+    }
 }
