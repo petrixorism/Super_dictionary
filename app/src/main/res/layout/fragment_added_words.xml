@@ -41,6 +41,7 @@
             app:layout_constraintTop_toTopOf="@+id/textView2" />
 
         <ImageButton
+            android:id="@+id/grid_btn"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginEnd="18dp"
@@ -62,6 +63,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
         tools:listitem="@layout/item_add_word" />
+
+    <TextView
+        style="@style/MyTextStyle"
+        android:id="@+id/info_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Add as many as you can\nIt is totally free!"
+        android:textColor="@color/text_color"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_word_btn"

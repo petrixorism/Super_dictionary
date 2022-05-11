@@ -30,16 +30,18 @@
 
 
         <ImageButton
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:id="@+id/exit_btn"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
             android:layout_marginStart="18dp"
-            android:background="?android:selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_text"
+            android:background="@drawable/ic_exit"
+            android:foreground="?android:selectableItemBackgroundBorderless"
             app:layout_constraintBottom_toBottomOf="@+id/textView2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView2" />
 
         <ImageButton
+            android:id="@+id/grid_btn"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginEnd="18dp"

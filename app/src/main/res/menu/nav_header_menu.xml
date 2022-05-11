@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/ic_home_feather"
+        android:title="Home" />
+
+
+    <item
+        android:id="@+id/historyFragment"
+        android:icon="@drawable/ic_history"
+        android:title="History" />
+    <item
+        android:id="@+id/favouritesFragment"
+        android:icon="@drawable/ic_bookmark"
+        android:title="Saved words" />
+
+    <item
+        android:id="@+id/addedWordsFragment"
+        android:icon="@drawable/ic_plus"
+        android:title="Add word" />
+
+
+    <item
+        android:id="@+id/infoFragment"
+        android:icon="@drawable/ic_info"
+        android:title="Info" />
+</menu>

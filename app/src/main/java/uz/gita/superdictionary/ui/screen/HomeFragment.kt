@@ -5,9 +5,11 @@ import android.content.Intent
 import android.database.Cursor
 import android.os.Bundle
 import android.speech.RecognizerIntent
-import android.speech.tts.TextToSpeech
+import android.view.Gravity
 import android.view.View
 import android.widget.SearchView
+import android.widget.Toast
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -40,7 +42,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         viewModel.updateWordLiveData.observe(this, updateWordObserver)
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        showToast("OnViewCreated")
 
         FastScrollerBuilder(binding.wordsRv)
             .build()
@@ -73,6 +78,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
         binding.voiceToTextBtn.setOnClickListener {
             speechToText()
+        }
+        binding.gridBtn.setOnClickListener {
+            val drawer = requireActivity().findViewById<DrawerLayout>(R.id.drawer_layout)
+            drawer.openDrawer(Gravity.RIGHT)
         }
 
     }

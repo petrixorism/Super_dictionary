@@ -1,7 +1,9 @@
 package uz.gita.superdictionary.ui.screen
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -54,6 +56,10 @@ class AddWordFragment : Fragment(R.layout.fragment_add_word) {
                 requireActivity().onBackPressed()
             }
 
+        }
+        binding.gridBtn.setOnClickListener {
+            val drawer = requireActivity().findViewById<DrawerLayout>(R.id.drawer_layout)
+            drawer.openDrawer(Gravity.RIGHT)
         }
 
     }

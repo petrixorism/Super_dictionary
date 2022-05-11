@@ -169,6 +169,7 @@
                     android:layout_height="20dp"
                     android:layout_marginEnd="16dp"
                     android:background="@drawable/ic_copy"
+                    android:foreground="?android:selectableItemBackgroundBorderless"
                     app:layout_constraintBottom_toBottomOf="@+id/text_meaning"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/text_meaning" />
@@ -200,8 +201,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:background="@drawable/white_background"
                 android:visibility="gone"
+                android:background="@drawable/white_background"
                 app:layout_constraintTop_toBottomOf="@id/meaning_container">
 
                 <TextView
@@ -220,6 +221,7 @@
                     android:id="@+id/copy_examples_btn"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
+                    android:foreground="?android:selectableItemBackgroundBorderless"
                     android:layout_marginEnd="16dp"
                     android:background="@drawable/ic_copy"
                     app:layout_constraintBottom_toBottomOf="@+id/text_word_example"
@@ -253,8 +255,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:background="@drawable/white_background"
                 android:visibility="gone"
+                android:background="@drawable/white_background"
                 app:layout_constraintTop_toBottomOf="@id/example_container">
 
                 <TextView
@@ -270,8 +272,9 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageButton
-                    android:id="@+id/copy_antonym_btn"
+                    android:id="@+id/copy_synonym_btn"
                     android:layout_width="20dp"
+                    android:foreground="?android:selectableItemBackgroundBorderless"
                     android:layout_height="20dp"
                     android:layout_marginEnd="16dp"
                     android:background="@drawable/ic_copy"
@@ -324,10 +327,11 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageButton
-                    android:id="@+id/copy_synonym_btn"
+                    android:id="@+id/copy_antonym_btn"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginEnd="16dp"
+                    android:foreground="?android:selectableItemBackgroundBorderless"
                     android:background="@drawable/ic_copy"
                     app:layout_constraintBottom_toBottomOf="@+id/text_word_antonym"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -355,10 +359,8 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

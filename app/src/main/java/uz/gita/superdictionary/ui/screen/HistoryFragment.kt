@@ -1,7 +1,10 @@
 package uz.gita.superdictionary.ui.screen
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
+import android.view.View.VISIBLE
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,6 +32,9 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         viewModel.historyListLiveData.observe(viewLifecycleOwner) {
+            if (it.isEmpty()){
+                binding.infoTv.visibility = VISIBLE
+            }
             historyAdapter.submitList(it)
         }
         binding.historyRv.apply {
@@ -42,6 +48,10 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
 
         binding.deleteAll.setOnClickListener {
             viewModel.deleteAll()
+        }
+        binding.gridBtn.setOnClickListener {
+            val drawer = requireActivity().findViewById<DrawerLayout>(R.id.drawer_layout)
+            drawer.openDrawer(Gravity.RIGHT)
         }
 
     }

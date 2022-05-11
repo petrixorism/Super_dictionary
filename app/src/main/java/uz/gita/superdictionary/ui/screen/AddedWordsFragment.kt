@@ -1,7 +1,9 @@
 package uz.gita.superdictionary.ui.screen
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -33,9 +35,6 @@ class AddedWordsFragment : Fragment(R.layout.fragment_added_words) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.getAllWordsLiveData.observe(requireActivity()) {
-            adapter.submitList(it)
-        }
 
 
         lifecycleScope.launchWhenCreated {
@@ -74,6 +73,10 @@ class AddedWordsFragment : Fragment(R.layout.fragment_added_words) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        binding.gridBtn.setOnClickListener {
+            val drawer = requireActivity().findViewById<DrawerLayout>(R.id.drawer_layout)
+            drawer.openDrawer(Gravity.RIGHT)
+        }
 
         binding.addedWordsRv.adapter = adapter
 
@@ -91,6 +94,12 @@ class AddedWordsFragment : Fragment(R.layout.fragment_added_words) {
 
         binding.addWordBtn.setOnClickListener {
             findNavController().navigate(AddedWordsFragmentDirections.actionAddedWordsFragmentToAddWordFragment())
+        }
+        viewModel.getAllWordsLiveData.observe(requireActivity()) {
+            if (it.isEmpty()) {
+                binding.infoTv.visibility = View.VISIBLE
+            }
+            adapter.submitList(it)
         }
     }
 

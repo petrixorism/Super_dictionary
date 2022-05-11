@@ -5,11 +5,34 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/splashFragment">
 
+    <action
+        android:id="@+id/actionToHome"
+        app:destination="@id/homeFragment" />
+
+    <action
+        android:id="@+id/actionToHistory"
+        app:destination="@id/historyFragment"
+        app:popUpTo="@id/historyFragment" />
+
+    <action
+        android:id="@+id/actionToSavedWords"
+        app:destination="@id/favouritesFragment" />
+
+    <action
+        android:id="@+id/actionToAddWords"
+        app:destination="@id/addedWordsFragment" />
+
+    <action
+        android:id="@+id/actionToInfo"
+        app:destination="@id/settingsFragment" />
+
+
     <fragment
         android:id="@+id/addWordFragment"
         android:name="uz.gita.superdictionary.ui.screen.AddWordFragment"
         android:label="AddWordFragment"
         tools:layout="@layout/fragment_add_word" />
+
     <fragment
         android:id="@+id/addedWordsFragment"
         android:name="uz.gita.superdictionary.ui.screen.AddedWordsFragment"
@@ -25,6 +48,7 @@
             android:id="@+id/action_addedWordsFragment_to_wordFragment"
             app:destination="@id/wordFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/favouritesFragment"
         android:name="uz.gita.superdictionary.ui.screen.FavouritesFragment"
@@ -34,6 +58,8 @@
             android:id="@+id/action_favouritesFragment_to_wordFragment"
             app:destination="@id/wordFragment" />
     </fragment>
+
+
     <fragment
         android:id="@+id/historyFragment"
         android:name="uz.gita.superdictionary.ui.screen.HistoryFragment"
@@ -48,6 +74,8 @@
             android:id="@+id/action_homeFragment_to_wordFragment"
             app:destination="@id/wordFragment" />
     </fragment>
+
+
     <fragment
         android:id="@+id/shareFragment"
         android:name="uz.gita.superdictionary.ui.screen.ShareFragment"
@@ -62,6 +90,7 @@
             android:id="@+id/action_splashFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/wordFragment"
         android:name="uz.gita.superdictionary.ui.screen.WordFragment"
@@ -89,11 +118,13 @@
             android:name="isSaved"
             app:argType="string" />
     </fragment>
+
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="uz.gita.superdictionary.ui.screen.SettingsFragment"
+        android:name="uz.gita.superdictionary.ui.screen.InfoFragment"
         android:label="SettingsFragment"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_info" />
+
     <fragment
         android:id="@+id/editWordFragment"
         android:name="uz.gita.superdictionary.ui.screen.EditWordFragment"
@@ -103,15 +134,12 @@
         <argument
             android:name="id"
             app:argType="integer" />
-
         <argument
             android:name="word"
             app:argType="string" />
-
         <argument
             android:name="meaning"
             app:argType="string" />
-
         <argument
             android:name="example"
             app:argType="string" />
