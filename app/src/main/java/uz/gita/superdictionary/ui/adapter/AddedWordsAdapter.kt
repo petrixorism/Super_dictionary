@@ -10,6 +10,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import uz.gita.superdictionary.R
 import uz.gita.superdictionary.data.db.AddedWordEntity
 import uz.gita.superdictionary.databinding.ItemAddWordBinding
+import uz.gita.superdictionary.util.toNormalCase
 
 class AddedWordsAdapter : ListAdapter<AddedWordEntity, AddedWordsAdapter.ViewHolder>(MyDiff) {
 
@@ -24,7 +25,7 @@ class AddedWordsAdapter : ListAdapter<AddedWordEntity, AddedWordsAdapter.ViewHol
 
         fun bind() {
             getItem(absoluteAdapterPosition).apply {
-                binding.textView.text = this.word
+                binding.textView.text = toNormalCase(this.word)
             }
         }
 
@@ -48,13 +49,14 @@ class AddedWordsAdapter : ListAdapter<AddedWordEntity, AddedWordsAdapter.ViewHol
     }
 
     object MyDiff : DiffUtil.ItemCallback<AddedWordEntity>() {
-        override fun areItemsTheSame(oldItem: AddedWordEntity, newItem: AddedWordEntity): Boolean
-        {
+        override fun areItemsTheSame(oldItem: AddedWordEntity, newItem: AddedWordEntity): Boolean {
             return oldItem.id == newItem.id && oldItem.word == newItem.word
         }
 
-        override fun areContentsTheSame(oldItem: AddedWordEntity, newItem: AddedWordEntity): Boolean
-        {
+        override fun areContentsTheSame(
+            oldItem: AddedWordEntity,
+            newItem: AddedWordEntity
+        ): Boolean {
             return oldItem.id == newItem.id && oldItem.word == newItem.word
         }
 

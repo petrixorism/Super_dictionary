@@ -5,27 +5,6 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/splashFragment">
 
-    <action
-        android:id="@+id/actionToHome"
-        app:destination="@id/homeFragment" />
-
-    <action
-        android:id="@+id/actionToHistory"
-        app:destination="@id/historyFragment"
-        app:popUpTo="@id/historyFragment" />
-
-    <action
-        android:id="@+id/actionToSavedWords"
-        app:destination="@id/favouritesFragment" />
-
-    <action
-        android:id="@+id/actionToAddWords"
-        app:destination="@id/addedWordsFragment" />
-
-    <action
-        android:id="@+id/actionToInfo"
-        app:destination="@id/settingsFragment" />
-
 
     <fragment
         android:id="@+id/addWordFragment"
@@ -64,7 +43,11 @@
         android:id="@+id/historyFragment"
         android:name="uz.gita.superdictionary.ui.screen.HistoryFragment"
         android:label="HistoryFragment"
-        tools:layout="@layout/fragment_history" />
+        tools:layout="@layout/fragment_history">
+        <action
+            android:id="@+id/action_historyFragment_to_wordFragment"
+            app:destination="@id/wordFragment" />
+    </fragment>
     <fragment
         android:id="@+id/homeFragment"
         android:name="uz.gita.superdictionary.ui.screen.HomeFragment"

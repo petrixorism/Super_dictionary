@@ -15,7 +15,6 @@ import uz.gita.superdictionary.ui.viewmodel.AddWordViewModel
 import uz.gita.superdictionary.ui.viewmodel.impl.AddWordViewModelImpl
 import uz.gita.superdictionary.util.showSnackBar
 import uz.gita.superdictionary.util.showToast
-import java.util.*
 
 @AndroidEntryPoint
 class AddWordFragment : Fragment(R.layout.fragment_add_word) {

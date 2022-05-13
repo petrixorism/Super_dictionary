@@ -1,15 +1,18 @@
 package uz.gita.superdictionary
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.Gravity
 import android.view.Gravity.END
 import android.view.Gravity.RIGHT
 import android.view.View.GONE
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
+import uz.gita.superdictionary.data.SharedPref
 import uz.gita.superdictionary.databinding.ActivityMainBinding
 import uz.gita.superdictionary.util.makeVisibleOrGone
 
@@ -26,34 +29,11 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.containerFragment) as NavHostFragment
 
-        binding.navView.setNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.homeFragment -> {
-                    findNavController(R.id.containerFragment).navigate(R.id.actionToHome)
-                    binding.drawerLayout.closeDrawer(RIGHT)
-                }
-                R.id.historyFragment -> {
-                    findNavController(R.id.containerFragment).navigate(R.id.actionToHistory)
-                    binding.drawerLayout.closeDrawer(RIGHT)
-                }
-                R.id.favouritesFragment -> {
-                    findNavController(R.id.containerFragment).navigate(R.id.actionToSavedWords)
-                    binding.drawerLayout.closeDrawer(RIGHT)
-                }
-                R.id.addedWordsFragment -> {
-                    findNavController(R.id.containerFragment).navigate(R.id.actionToAddWords)
-                    binding.drawerLayout.closeDrawer(RIGHT)
-                }
-                R.id.infoFragment -> {
-                    findNavController(R.id.containerFragment).navigate(R.id.actionToInfo)
-                    binding.drawerLayout.closeDrawer(RIGHT)
-                }
-            }
-            true
-        }
-
-//
         binding.bottomNav.setupWithNavController(navHostFragment.navController)
+        binding.navView.setupWithNavController(navHostFragment.navController)
+        binding.closeBtn.setOnClickListener {
+            binding.drawerLayout.closeDrawer(RIGHT)
+        }
 
         navHostFragment.navController.addOnDestinationChangedListener { _, destination, _ ->
             // invisible some fragments later
@@ -70,6 +50,29 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        if (SharedPref.getInstance().isDayMode) {
+            AppCompatDelegate
+                .setDefaultNightMode(
+                    AppCompatDelegate
+                        .MODE_NIGHT_NO
+                )
+        } else {
+            AppCompatDelegate
+                .setDefaultNightMode(
+                    AppCompatDelegate
+                        .MODE_NIGHT_YES
+                )
+        }
+    }
+
+    @SuppressLint("RtlHardcoded")
+    override fun onBackPressed() {
+        val drawer = binding.drawerLayout
+        if (drawer.isDrawerOpen(RIGHT)) {
+            drawer.closeDrawer(RIGHT)
+        } else {
+            super.onBackPressed()
+        }
     }
 
 

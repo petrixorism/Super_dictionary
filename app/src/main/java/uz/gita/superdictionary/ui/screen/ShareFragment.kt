@@ -5,5 +5,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import uz.gita.superdictionary.R
 
 @AndroidEntryPoint
-class ShareFragment:Fragment(R.layout.fragment_share) {
+class ShareFragment : Fragment(R.layout.fragment_share) {
+
+
 }

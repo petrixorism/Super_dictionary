@@ -29,13 +29,15 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-        <ImageButton
-            android:id="@+id/exit_btn"
-            android:layout_width="26dp"
-            android:layout_height="26dp"
+        <ToggleButton
+            android:id="@+id/mode_btn"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginStart="18dp"
-            android:background="@drawable/ic_exit"
+            android:background="@drawable/day_and_night_mode"
             android:foreground="?android:selectableItemBackgroundBorderless"
+            android:textOff=""
+            android:textOn=""
             app:layout_constraintBottom_toBottomOf="@+id/textView2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView2" />

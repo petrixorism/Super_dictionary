@@ -39,7 +39,6 @@ class AddedWordsFragment : Fragment(R.layout.fragment_added_words) {
 
         lifecycleScope.launchWhenCreated {
             viewModel.editFlow.collect {
-
                 findNavController().navigate(
                     AddedWordsFragmentDirections.actionAddedWordsFragmentToEditWordFragment(
                         it.id,
@@ -76,6 +75,10 @@ class AddedWordsFragment : Fragment(R.layout.fragment_added_words) {
         binding.gridBtn.setOnClickListener {
             val drawer = requireActivity().findViewById<DrawerLayout>(R.id.drawer_layout)
             drawer.openDrawer(Gravity.RIGHT)
+        }
+
+        binding.backBtn.setOnClickListener {
+            requireActivity().onBackPressed()
         }
 
         binding.addedWordsRv.adapter = adapter

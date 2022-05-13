@@ -1,12 +1,10 @@
 package uz.gita.superdictionary.ui.screen
 
 import android.app.Activity.CLIPBOARD_SERVICE
-import android.app.Activity.RESULT_OK
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Intent
 import android.os.Bundle
-import android.speech.RecognizerIntent
 import android.speech.tts.TextToSpeech
 import android.view.Gravity
 import android.view.View
@@ -25,6 +23,7 @@ import uz.gita.superdictionary.ui.viewmodel.impl.WordViewModelImpl
 import uz.gita.superdictionary.util.makeVisibleOrGone
 import uz.gita.superdictionary.util.showSnackBar
 import uz.gita.superdictionary.util.showToast
+import uz.gita.superdictionary.util.toNormalCase
 import java.util.*
 
 @AndroidEntryPoint
@@ -91,7 +90,7 @@ class WordFragment : Fragment(R.layout.fragment_word) {
                 val clipboard =
                     requireContext().getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
                 val clip =
-                    ClipData.newPlainText("WORD", args.word[0] + args.word.substring(1).lowercase())
+                    ClipData.newPlainText("WORD", toNormalCase(args.word))
                 clipboard.setPrimaryClip(clip)
 
                 showToast("${args.word} copied")
@@ -100,7 +99,10 @@ class WordFragment : Fragment(R.layout.fragment_word) {
                 val clipboard =
                     requireContext().getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
                 val clip =
-                    ClipData.newPlainText("WORD", args.meaning)
+                    ClipData.newPlainText(
+                        "WORD",
+                        args.meaning.replace(",", ", ").replace("  ", " ")
+                    )
                 clipboard.setPrimaryClip(clip)
                 showToast("Meanings have been copied")
 
@@ -109,7 +111,10 @@ class WordFragment : Fragment(R.layout.fragment_word) {
                 val clipboard =
                     requireContext().getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
                 val clip =
-                    ClipData.newPlainText("WORD", args.example)
+                    ClipData.newPlainText(
+                        "WORD",
+                        args.example.replace(",", ", ").replace("  ", " ")
+                    )
                 clipboard.setPrimaryClip(clip)
                 showToast("Examples have been copied")
 
@@ -118,7 +123,10 @@ class WordFragment : Fragment(R.layout.fragment_word) {
                 val clipboard =
                     requireContext().getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
                 val clip =
-                    ClipData.newPlainText("WORD", args.synonym)
+                    ClipData.newPlainText(
+                        "WORD",
+                        args.synonym.replace(",", ", ").replace("  ", " ")
+                    )
                 clipboard.setPrimaryClip(clip)
                 showToast("Synonyms have been copied")
 
@@ -127,10 +135,24 @@ class WordFragment : Fragment(R.layout.fragment_word) {
                 val clipboard =
                     requireContext().getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
                 val clip =
-                    ClipData.newPlainText("WORD", args.antonym)
+                    ClipData.newPlainText(
+                        "WORD",
+                        args.antonym.replace(",", ", ").replace("  ", " ")
+                    )
                 clipboard.setPrimaryClip(clip)
                 showToast("Antonyms have been copied")
 
+            }
+            wordShare.setOnClickListener {
+                val text = "${args.word}\n\n${args.meaning.replace(",", ", ").replace("  ", " ")}"
+                val sendIntent: Intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, text)
+                    type = "text/plain"
+                }
+
+                val shareIntent = Intent.createChooser(sendIntent, null)
+                requireActivity().startActivity(shareIntent)
             }
         }
         textToSpeech = TextToSpeech(requireContext()) { status ->
@@ -141,9 +163,8 @@ class WordFragment : Fragment(R.layout.fragment_word) {
         }
         textToSpeech!!.language = Locale.UK
         binding.wordVoice.setOnClickListener {
-            val word = args.word
             textToSpeech!!.speak(
-                word[0] + word.substring(1, word.length),
+                toNormalCase(args.word),
                 TextToSpeech.QUEUE_FLUSH,
                 null,
                 ""

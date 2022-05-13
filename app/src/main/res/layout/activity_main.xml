@@ -5,14 +5,19 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="right"
     android:background="@color/background_color"
-    tools:context=".MainActivity">
+    android:fitsSystemWindows="true"
+    android:layoutDirection="rtl"
+    tools:context=".MainActivity"
+    tools:openDrawer="right">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layoutDirection="ltr">
 
-        <androidx.fragment.app.FragmentContainerView
+        <fragment
             android:id="@+id/containerFragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
@@ -44,11 +49,23 @@
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="end"
+        android:layout_gravity="right"
         android:fitsSystemWindows="true"
+        android:layoutDirection="ltr"
         app:headerLayout="@layout/nav_header"
         app:itemIconTint="@color/blue"
         app:itemTextColor="@color/blue"
-        app:menu="@menu/nav_header_menu" />
+        app:menu="@menu/nav_header_menu">
+
+        <Button
+            android:id="@+id/close_btn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/ic_x_circle_cancel"/>
+
+
+    </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>

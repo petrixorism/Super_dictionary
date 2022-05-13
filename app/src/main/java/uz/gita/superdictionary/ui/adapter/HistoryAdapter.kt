@@ -10,10 +10,12 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import uz.gita.superdictionary.R
 import uz.gita.superdictionary.data.db.HistoryEntity
 import uz.gita.superdictionary.databinding.ItemHistoryBinding
+import uz.gita.superdictionary.util.toNormalCase
 
 class HistoryAdapter : ListAdapter<HistoryEntity, HistoryAdapter.ViewHolder>(MyDiff) {
 
     private var removeButtonClick: ((HistoryEntity) -> Unit)? = null
+    private var itemClick: ((HistoryEntity) -> Unit)? = null
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -21,13 +23,18 @@ class HistoryAdapter : ListAdapter<HistoryEntity, HistoryAdapter.ViewHolder>(MyD
 
         fun bind() {
             getItem(absoluteAdapterPosition).apply {
-                binding.textView.text = this.word
+                binding.textView.text = toNormalCase(this.word)
             }
         }
 
         init {
             binding.removeBtn.setOnClickListener {
                 removeButtonClick?.invoke(
+                    getItem(absoluteAdapterPosition)
+                )
+            }
+            binding.root.setOnClickListener {
+                itemClick?.invoke(
                     getItem(absoluteAdapterPosition)
                 )
             }
@@ -58,5 +65,9 @@ class HistoryAdapter : ListAdapter<HistoryEntity, HistoryAdapter.ViewHolder>(MyD
 
     fun setRemoveClick(block: ((HistoryEntity) -> Unit)) {
         removeButtonClick = block
+    }
+
+    fun setItemClick(block: ((HistoryEntity) -> Unit)) {
+        itemClick = block
     }
 }

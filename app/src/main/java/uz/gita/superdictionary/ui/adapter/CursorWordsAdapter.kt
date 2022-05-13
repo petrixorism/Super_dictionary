@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import me.zhanghai.android.fastscroll.PopupTextProvider
 import uz.gita.superdictionary.data.db.WordEntity
 import uz.gita.superdictionary.databinding.ItemWordBinding
+import uz.gita.superdictionary.util.toNormalCase
 
 
 class CursorWordsAdapter : RecyclerView.Adapter<CursorWordsAdapter.Holder>(), PopupTextProvider {
@@ -31,9 +32,6 @@ class CursorWordsAdapter : RecyclerView.Adapter<CursorWordsAdapter.Holder>(), Po
             cursor?.let { cursor ->
                 cursor.moveToPosition(absoluteAdapterPosition)
 
-                var word = cursor.getString(cursor.getColumnIndexOrThrow("en_word"))
-                word = word[0] + word.substring(1, word.length).lowercase()
-
 
                 val data = WordEntity(
                     cursor.getInt(cursor.getColumnIndexOrThrow("id")),
@@ -46,7 +44,7 @@ class CursorWordsAdapter : RecyclerView.Adapter<CursorWordsAdapter.Holder>(), Po
                 )
 
                 itemWordBinding.apply {
-                    this.textView.text = word
+                    this.textView.text = toNormalCase(data.word)
                     this.isSavedTgbtn.isChecked = data.isSaved == 1
                 }
 
@@ -89,7 +87,8 @@ class CursorWordsAdapter : RecyclerView.Adapter<CursorWordsAdapter.Holder>(), Po
     }
 
     override fun getPopupText(position: Int): String {
-        return cursor!!.getString(cursor!!.getColumnIndexOrThrow("en_word")).substring(0, 1).uppercase()
+        return cursor!!.getString(cursor!!.getColumnIndexOrThrow("en_word")).substring(0, 1)
+            .uppercase()
     }
 
 }

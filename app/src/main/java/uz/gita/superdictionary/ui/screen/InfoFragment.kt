@@ -22,6 +22,10 @@ class InfoFragment : Fragment(R.layout.fragment_info) {
             val drawer = requireActivity().findViewById<DrawerLayout>(R.id.drawer_layout)
             drawer.openDrawer(Gravity.RIGHT)
         }
+        binding.backBtn.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
+
 
     }
 

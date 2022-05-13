@@ -8,18 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import uz.gita.superdictionary.R
 import uz.gita.superdictionary.databinding.FragmentFavouritesBinding
-import uz.gita.superdictionary.databinding.FragmentWordBinding
 import uz.gita.superdictionary.ui.adapter.CursorWordsAdapter
 import uz.gita.superdictionary.ui.viewmodel.FavouritesViewModel
-import uz.gita.superdictionary.ui.viewmodel.WordViewModel
 import uz.gita.superdictionary.ui.viewmodel.impl.FavouritesViewModelImpl
-import uz.gita.superdictionary.ui.viewmodel.impl.WordViewModelImpl
-import uz.gita.superdictionary.util.showSnackBar
 import uz.gita.superdictionary.util.showToast
 
 @AndroidEntryPoint

@@ -8,7 +8,8 @@ import android.speech.RecognizerIntent
 import android.view.Gravity
 import android.view.View
 import android.widget.SearchView
-import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -19,12 +20,12 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import me.zhanghai.android.fastscroll.FastScrollerBuilder
 import uz.gita.superdictionary.R
+import uz.gita.superdictionary.data.SharedPref
 import uz.gita.superdictionary.databinding.FragmentHomeBinding
 import uz.gita.superdictionary.ui.adapter.CursorWordsAdapter
 import uz.gita.superdictionary.ui.viewmodel.HomeViewModel
 import uz.gita.superdictionary.ui.viewmodel.impl.HomeViewModelImpl
 import uz.gita.superdictionary.util.showToast
-import java.util.*
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -44,8 +45,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        showToast("OnViewCreated")
 
         FastScrollerBuilder(binding.wordsRv)
             .build()
@@ -79,10 +78,49 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.voiceToTextBtn.setOnClickListener {
             speechToText()
         }
+
         binding.gridBtn.setOnClickListener {
             val drawer = requireActivity().findViewById<DrawerLayout>(R.id.drawer_layout)
             drawer.openDrawer(Gravity.RIGHT)
         }
+
+        binding.modeBtn.isChecked = !SharedPref.getInstance().isDayMode
+
+        binding.modeBtn.setOnClickListener {
+            if (binding.modeBtn.isChecked) {
+                SharedPref.getInstance().isDayMode = false
+                AppCompatDelegate
+                    .setDefaultNightMode(
+                        AppCompatDelegate
+                            .MODE_NIGHT_YES
+                    )
+
+            } else {
+                SharedPref.getInstance().isDayMode = true
+                AppCompatDelegate
+                    .setDefaultNightMode(
+                        AppCompatDelegate
+                            .MODE_NIGHT_NO
+                    )
+            }
+
+        }
+
+        var counter = 0
+
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (counter == 0) {
+                        showToast("Press back twice to exit")
+                        counter++
+                    } else {
+                        requireActivity().finish()
+                    }
+                }
+
+            })
 
     }
 
