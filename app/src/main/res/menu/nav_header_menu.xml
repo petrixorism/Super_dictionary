@@ -6,7 +6,6 @@
         android:icon="@drawable/ic_home_feather"
         android:title="Home" />
 
-
     <item
         android:id="@+id/historyFragment"
         android:icon="@drawable/ic_history"
@@ -22,9 +21,9 @@
         android:icon="@drawable/ic_plus"
         android:title="Add word" />
 
-
     <item
         android:id="@+id/settingsFragment"
         android:icon="@drawable/ic_info"
         android:title="Info" />
+
 </menu>

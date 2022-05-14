@@ -90,4 +90,7 @@ dependencies {
 
     //Fast scrolling
     implementation 'me.zhanghai.android.fastscroll:library:1.1.8'
+
+    // Dexter
+    implementation 'com.karumi:dexter:6.2.3'
 }

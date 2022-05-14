@@ -8,10 +8,12 @@ import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.view.Gravity
 import android.view.View
+import android.widget.PopupMenu
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -144,15 +146,7 @@ class WordFragment : Fragment(R.layout.fragment_word) {
 
             }
             wordShare.setOnClickListener {
-                val text = "${args.word}\n\n${args.meaning.replace(",", ", ").replace("  ", " ")}"
-                val sendIntent: Intent = Intent().apply {
-                    action = Intent.ACTION_SEND
-                    putExtra(Intent.EXTRA_TEXT, text)
-                    type = "text/plain"
-                }
-
-                val shareIntent = Intent.createChooser(sendIntent, null)
-                requireActivity().startActivity(shareIntent)
+                showPupUp(it)
             }
         }
         textToSpeech = TextToSpeech(requireContext()) { status ->
@@ -189,5 +183,39 @@ class WordFragment : Fragment(R.layout.fragment_word) {
         super.onDestroy()
 
 
+    }
+
+    fun showPupUp(button: View) {
+        val popup = PopupMenu(requireContext(), button)
+        popup.inflate(R.menu.item_menu)
+        popup.show()
+        popup.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.text -> {
+                    val text =
+                        "${args.word}\n\n${args.meaning.replace(",", ", ").replace("  ", " ")}"
+                    val sendIntent: Intent = Intent().apply {
+                        action = Intent.ACTION_SEND
+                        putExtra(Intent.EXTRA_TEXT, text)
+                        type = "text/plain"
+                    }
+
+                    val shareIntent = Intent.createChooser(sendIntent, null)
+                    requireActivity().startActivity(shareIntent)
+                    return@setOnMenuItemClickListener true
+                }
+                R.id.image -> {
+                    findNavController().navigate(
+                        WordFragmentDirections.actionWordFragmentToShareFragment(
+                            toNormalCase(args.word),
+                            args.meaning.replace(",", ", ").replace("  ", " ")
+                        )
+                    )
+                    return@setOnMenuItemClickListener true
+                }
+            }
+
+            return@setOnMenuItemClickListener false
+        }
     }
 }

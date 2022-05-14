@@ -63,7 +63,14 @@
         android:id="@+id/shareFragment"
         android:name="uz.gita.superdictionary.ui.screen.ShareFragment"
         android:label="ShareFragment"
-        tools:layout="@layout/fragment_share" />
+        tools:layout="@layout/fragment_share" >
+        <argument
+            android:name="word"
+            app:argType="string" />
+        <argument
+            android:name="meaning"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/splashFragment"
         android:name="uz.gita.superdictionary.ui.screen.SplashFragment"
@@ -100,6 +107,9 @@
         <argument
             android:name="isSaved"
             app:argType="string" />
+        <action
+            android:id="@+id/action_wordFragment_to_shareFragment"
+            app:destination="@id/shareFragment" />
     </fragment>
 
     <fragment

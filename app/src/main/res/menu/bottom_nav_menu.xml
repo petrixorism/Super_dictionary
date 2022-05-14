@@ -6,7 +6,6 @@
         android:icon="@drawable/ic_plus"
         android:title="Add word" />
 
-
     <item
         android:id="@+id/favouritesFragment"
         android:icon="@drawable/ic_bookmark"
